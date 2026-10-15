@@ -3,4 +3,5 @@ bin/
 cftui.exe
 *.test
 *.out
+dist/
 .omo/
