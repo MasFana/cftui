@@ -6,12 +6,25 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 
 	"github.com/masfana/cftui/internal/cf"
 	"github.com/masfana/cftui/internal/local"
 )
+
+// setHome points the user's home directory at dir for the duration of the
+// test. os.UserHomeDir reads HOME on Unix but USERPROFILE on Windows, so a
+// test that sets only HOME would read the real home directory on Windows and
+// find no credentials where it expected some.
+func setHome(t *testing.T, dir string) {
+	t.Helper()
+	t.Setenv("HOME", dir)
+	if runtime.GOOS == "windows" {
+		t.Setenv("USERPROFILE", dir)
+	}
+}
 
 type fakeBackend struct {
 	tunnels    []cf.Tunnel
@@ -260,7 +273,7 @@ func TestBadgeForUnlistedTunnelUsesCredentials(t *testing.T) {
 	if err := os.WriteFile(filepath.Join(credDir, id+".json"), []byte("{}"), 0o600); err != nil {
 		t.Fatalf("write cred: %v", err)
 	}
-	t.Setenv("HOME", home)
+	setHome(t, home)
 
 	remoteB := &fakeBackend{tunnels: []cf.Tunnel{{Name: "fana", ID: id, Status: "inactive"}}}
 	out := captureStdout(t, func() {

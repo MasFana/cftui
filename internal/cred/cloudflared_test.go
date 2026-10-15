@@ -5,9 +5,21 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 )
+
+// shellScriptsNoop skips a test that stands in a POSIX shell script for the
+// cloudflared binary. Windows has no /bin/sh and execs only .exe files, so
+// these stubs cannot run there; the behaviour they cover is exercised on
+// Linux and macOS.
+func shellScriptsNoop(t *testing.T) {
+	t.Helper()
+	if runtime.GOOS == "windows" {
+		t.Skip("stub is a POSIX shell script; Windows cannot exec it")
+	}
+}
 
 func TestDetectCloudflaredMissingBinary(t *testing.T) {
 	t.Setenv("PATH", t.TempDir())
@@ -19,6 +31,7 @@ func TestDetectCloudflaredMissingBinary(t *testing.T) {
 }
 
 func TestDetectCloudflaredUsesConfiguredPath(t *testing.T) {
+	shellScriptsNoop(t)
 	dir := t.TempDir()
 	path := filepath.Join(dir, "cloudflared")
 	if err := os.WriteFile(path, []byte("#!/bin/sh\nprintf 'cloudflared version 2022.1.0\\n'\n"), 0o700); err != nil {
@@ -36,6 +49,7 @@ func TestDetectCloudflaredUsesConfiguredPath(t *testing.T) {
 // a real tunnel.
 func stubCloudflared(t *testing.T, body string) {
 	t.Helper()
+	shellScriptsNoop(t)
 	dir := t.TempDir()
 	path := filepath.Join(dir, "cloudflared")
 	if err := os.WriteFile(path, []byte("#!/bin/sh\n"+body), 0o755); err != nil {

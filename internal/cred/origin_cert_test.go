@@ -5,9 +5,22 @@ import (
 	"encoding/pem"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 )
+
+// setHome points the user's home directory at dir for the duration of the
+// test. os.UserHomeDir reads HOME on Unix but USERPROFILE on Windows, so a
+// test that sets only HOME would silently read the real home directory on
+// Windows and test nothing.
+func setHome(t *testing.T, dir string) {
+	t.Helper()
+	t.Setenv("HOME", dir)
+	if runtime.GOOS == "windows" {
+		t.Setenv("USERPROFILE", dir)
+	}
+}
 
 func encode(t *testing.T, cert OriginCert, withLegacy bool) []byte {
 	t.Helper()
@@ -110,7 +123,7 @@ func TestFindPathPrefersExplicitThenEnv(t *testing.T) {
 }
 
 func TestFindPathMissing(t *testing.T) {
-	t.Setenv("HOME", t.TempDir())
+	setHome(t, t.TempDir())
 	t.Setenv(EnvOriginCert, "")
 	if _, err := FindPath(""); err == nil {
 		t.Fatal("want ErrMissingCredential")
