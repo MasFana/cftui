@@ -1,0 +1,6 @@
+bin/
+/cftui
+cftui.exe
+*.test
+*.out
+.omo/
