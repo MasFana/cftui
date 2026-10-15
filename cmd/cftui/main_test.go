@@ -40,6 +40,39 @@ func (f *fakeBackend) Health(context.Context, string) ([]cf.Connector, error) { 
 
 var _ cf.Backend = (*fakeBackend)(nil)
 
+func TestVersionStringDefaultsToDev(t *testing.T) {
+	oldV, oldC, oldD := version, commit, date
+	defer func() { version, commit, date = oldV, oldC, oldD }()
+
+	version, commit, date = "", "", ""
+	if got := versionString(); got != "cftui dev" {
+		t.Fatalf("unset version must degrade to dev, got %q", got)
+	}
+}
+
+func TestVersionStringIncludesLinkerValues(t *testing.T) {
+	oldV, oldC, oldD := version, commit, date
+	defer func() { version, commit, date = oldV, oldC, oldD }()
+
+	version, commit, date = "v1.2.3", "abc1234", "2026-10-15"
+	got := versionString()
+	for _, want := range []string{"v1.2.3", "abc1234", "2026-10-15"} {
+		if !strings.Contains(got, want) {
+			t.Fatalf("versionString() = %q, missing %q", got, want)
+		}
+	}
+}
+
+func TestVersionStringOmitsEmptyParts(t *testing.T) {
+	oldV, oldC, oldD := version, commit, date
+	defer func() { version, commit, date = oldV, oldC, oldD }()
+
+	version, commit, date = "v1.2.3", "", ""
+	if got := versionString(); got != "cftui v1.2.3" {
+		t.Fatalf("empty commit/date must not leave dangling spaces, got %q", got)
+	}
+}
+
 func TestManagementForRemoteTunnelIsRemote(t *testing.T) {
 	file, err := local.Load(filepath.Join(t.TempDir(), "config.yml"))
 	if err != nil {

@@ -9,6 +9,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -21,11 +22,36 @@ import (
 
 const defaultConfigFile = "config.yml"
 
+// Set by the linker at release time (-X main.version=...). Empty in a plain
+// `go build`, which is why versionString degrades to "dev".
+var (
+	version = ""
+	commit  = ""
+	date    = ""
+)
+
+// versionString is the one-line identity printed by -version.
+func versionString() string {
+	v := version
+	if v == "" {
+		v = "dev"
+	}
+	parts := []string{"cftui", v}
+	if commit != "" {
+		parts = append(parts, commit)
+	}
+	if date != "" {
+		parts = append(parts, date)
+	}
+	return strings.Join(parts, " ")
+}
+
 func main() {
 	fs := flag.NewFlagSet("cftui", flag.ExitOnError)
 	originCert := fs.String("origincert", "", "path to the cloudflared origin certificate (default: $TUNNEL_ORIGIN_CERT, then ~/.cloudflared/cert.pem)")
 	configPath := fs.String("config", "", "path to the cloudflared config.yml (default: $TUNNEL_CONFIG, then ~/.cloudflared/config.yml)")
 	debug := fs.Bool("debug", false, "print the tunnel list and exit without starting the TUI")
+	showVersion := fs.Bool("version", false, "print the version and exit")
 	fs.Usage = func() {
 		fmt.Fprintf(fs.Output(), "cftui - a terminal UI for Cloudflare Zero Trust tunnels\n\n")
 		fmt.Fprintf(fs.Output(), "Usage:\n  cftui [flags]\n\nFlags:\n")
@@ -33,6 +59,10 @@ func main() {
 	}
 	_ = fs.Parse(os.Args[1:])
 
+	if *showVersion {
+		fmt.Println(versionString())
+		return
+	}
 	cfg := resolveConfigPath(*configPath)
 	file, err := local.Load(cfg)
 	if err != nil {
