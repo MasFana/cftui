@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/masfana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cf"
 )
 
 func TestStagingLifecycle(t *testing.T) {

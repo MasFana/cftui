@@ -3,7 +3,7 @@ package ui
 import (
 	"fmt"
 
-	"github.com/masfana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cf"
 )
 
 // Line is one rendered diff row.

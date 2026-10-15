@@ -14,10 +14,10 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/masfana/cftui/internal/cf"
-	"github.com/masfana/cftui/internal/cred"
-	"github.com/masfana/cftui/internal/local"
-	"github.com/masfana/cftui/internal/ui"
+	"github.com/MasFana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cred"
+	"github.com/MasFana/cftui/internal/local"
+	"github.com/MasFana/cftui/internal/ui"
 )
 
 const defaultConfigFile = "config.yml"

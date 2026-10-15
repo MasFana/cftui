@@ -1,4 +1,4 @@
-module github.com/masfana/cftui
+module github.com/MasFana/cftui
 
 go 1.24.0
 

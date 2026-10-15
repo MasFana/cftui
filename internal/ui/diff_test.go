@@ -3,7 +3,7 @@ package ui
 import (
 	"testing"
 
-	"github.com/masfana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cf"
 )
 
 func TestDiffRoutesRendersAddRemove(t *testing.T) {

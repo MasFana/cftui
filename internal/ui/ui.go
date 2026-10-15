@@ -14,11 +14,11 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/masfana/cftui/internal/cf"
-	"github.com/masfana/cftui/internal/cred"
-	"github.com/masfana/cftui/internal/health"
-	"github.com/masfana/cftui/internal/local"
-	"github.com/masfana/cftui/internal/validate"
+	"github.com/MasFana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cred"
+	"github.com/MasFana/cftui/internal/health"
+	"github.com/MasFana/cftui/internal/local"
+	"github.com/MasFana/cftui/internal/validate"
 )
 
 // View is the screen currently taking keystrokes.

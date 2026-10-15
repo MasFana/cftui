@@ -3,7 +3,7 @@
 ## Setup
 
 ```sh
-git clone https://github.com/masfana/cftui
+git clone https://github.com/MasFana/cftui
 cd cftui
 go build -o cftui ./cmd/cftui
 go test ./...

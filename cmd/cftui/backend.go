@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/masfana/cftui/internal/cf"
-	"github.com/masfana/cftui/internal/cred"
-	"github.com/masfana/cftui/internal/local"
+	"github.com/MasFana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cred"
+	"github.com/MasFana/cftui/internal/local"
 )
 
 // localBackend adapts a parsed cloudflared config.yml to cf.Backend, so the UI

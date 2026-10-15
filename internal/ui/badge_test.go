@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/masfana/cftui/internal/cf"
-	"github.com/masfana/cftui/internal/local"
+	"github.com/MasFana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/local"
 )
 
 func TestBadgeNamesOwningSide(t *testing.T) {

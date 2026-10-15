@@ -11,7 +11,7 @@ Every tagged release publishes static binaries for:
 | Windows | `amd64`, `arm64` |
 
 Download the archive matching your platform from the
-[releases page](https://github.com/masfana/cftui/releases), verify it against
+[releases page](https://github.com/MasFana/cftui/releases), verify it against
 the published `checksums.txt`, extract the `cftui` binary, and put it on your
 `PATH`.
 
@@ -28,7 +28,7 @@ sha256sum --check checksums.txt --ignore-missing
 Requires Go 1.24 or newer.
 
 ```sh
-go install github.com/masfana/cftui/cmd/cftui@latest
+go install github.com/MasFana/cftui/cmd/cftui@latest
 ```
 
 This installs to `$(go env GOPATH)/bin`, which is usually already on your
@@ -38,7 +38,7 @@ release metadata was injected at link time.
 ## Build from source
 
 ```sh
-git clone https://github.com/masfana/cftui
+git clone https://github.com/MasFana/cftui
 cd cftui
 go build -o cftui ./cmd/cftui
 ```

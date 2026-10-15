@@ -6,7 +6,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/masfana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cf"
 )
 
 func TestRouteURLBuildsPublicHostname(t *testing.T) {

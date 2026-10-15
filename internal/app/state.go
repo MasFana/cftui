@@ -5,7 +5,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/masfana/cftui/internal/cf"
+	"github.com/MasFana/cftui/internal/cf"
 )
 
 type State struct {

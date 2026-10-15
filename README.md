@@ -213,7 +213,7 @@ what the remote list shows.
 ### Prebuilt binaries (recommended)
 
 Grab the archive for your platform from the
-[releases page](https://github.com/masfana/cftui/releases) — Linux, macOS, and
+[releases page](https://github.com/MasFana/cftui/releases) — Linux, macOS, and
 Windows on `amd64` and `arm64`. Every release ships a `checksums.txt`; verify
 before you run.
 
@@ -227,13 +227,13 @@ distribution.
 ### With Go
 
 ```sh
-go install github.com/masfana/cftui/cmd/cftui@latest
+go install github.com/MasFana/cftui/cmd/cftui@latest
 ```
 
 ### From source
 
 ```sh
-git clone https://github.com/masfana/cftui
+git clone https://github.com/MasFana/cftui
 cd cftui
 go build ./cmd/cftui
 ```
