@@ -210,17 +210,48 @@ what the remote list shows.
 
 ## Install
 
+### Prebuilt binaries (recommended)
+
+Grab the archive for your platform from the
+[releases page](https://github.com/masfana/cftui/releases) — Linux, macOS, and
+Windows on `amd64` and `arm64`. Every release ships a `checksums.txt`; verify
+before you run.
+
+```sh
+sha256sum --check checksums.txt --ignore-missing
+```
+
+The binaries are static (`CGO_ENABLED=0`), so the Linux builds run on any
+distribution.
+
+### With Go
+
 ```sh
 go install github.com/masfana/cftui/cmd/cftui@latest
 ```
 
-Or from a clone:
+### From source
 
 ```sh
 git clone https://github.com/masfana/cftui
 cd cftui
 go build ./cmd/cftui
 ```
+
+---
+
+## Documentation
+
+Full documentation lives in [`docs/`](docs/):
+
+- [Installation](docs/installation.md) — binaries, `go install`, source builds
+- [Authentication](docs/authentication.md) — origin cert vs. connector token
+- [CLI reference](docs/cli.md) — flags, environment variables, exit codes
+- [Key reference](docs/keys.md) — every key, per view
+- [Configuration](docs/configuration.md) — how `config.yml` is found and edited
+- [Architecture](docs/architecture.md) — packages, backends, invariants
+- [Troubleshooting](docs/troubleshooting.md) — errors and what they mean
+- [Development](docs/development.md) — layout, tests, release process
 
 ---
 
@@ -231,6 +262,7 @@ cftui                                    # start the TUI
 cftui -config ./config.yml               # use a specific config file
 cftui -origincert /path/to/cert.pem      # use a specific origin certificate
 cftui -debug                             # print the tunnel list and exit
+cftui -version                           # print version and exit
 cftui -h                                 # show flags
 ```
 
@@ -239,6 +271,7 @@ cftui -h                                 # show flags
 | `-config <path>` | `$TUNNEL_CONFIG`, then `~/.cloudflared/config.yml` | Path to the cloudflared `config.yml`. |
 | `-origincert <path>` | `$TUNNEL_ORIGIN_CERT`, then `~/.cloudflared/cert.pem` | Path to the origin certificate. |
 | `-debug` | `false` | Print the tunnel list and exit without starting the TUI. Needs no terminal, so it is usable in scripts and CI. |
+| `-version` | `false` | Print the version and exit. Reports `cftui dev` for a plain `go build`; release binaries carry the tag, commit, and build date. |
 
 ### Keys
 
@@ -395,7 +428,10 @@ the reference is on screen.
 
 ## Contributing
 
-Issues and pull requests are welcome. Before opening a PR:
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for
+the full guide; security issues go through [SECURITY.md](SECURITY.md).
+
+Before opening a PR:
 
 - `gofmt -l .` prints nothing
 - `go vet ./...` is clean
