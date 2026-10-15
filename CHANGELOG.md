@@ -7,11 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-15
+
 ### Added
 
+- Terminal UI over Cloudflare Zero Trust tunnels: list, create, delete, and edit
+  ingress routes.
+- OAuth origin-certificate authentication; API tokens are refused.
+- Local-vs-remote management badges.
+- Connector-token display (masked, reveal with `v`).
+- Connector-token management: list, create, rename, and delete tokens.
+- Local `config.yml` editing with catch-all enforcement and reload pipeline.
+- `-version` flag, reporting linker-injected version, commit, and build date.
 - Multiple-platform release builds (Linux, macOS, Windows on `amd64` and
   `arm64`) via goreleaser.
-- `-version` flag, reporting linker-injected version, commit, and build date.
 - Continuous integration across Linux, macOS, and Windows, plus a cross-compile
   matrix.
 - Comprehensive documentation under `docs/`.
@@ -30,13 +39,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The ROUTES column no longer follows a stale count when the route list is
   empty.
 
-## [0.1.0]
-
-### Added
-
-- Terminal UI over Cloudflare Zero Trust tunnels: list, create, delete, and edit
-  ingress routes.
-- OAuth origin-certificate authentication; API tokens are refused.
-- Local-vs-remote management badges.
-- Connector-token display (masked, reveal with `v`).
-- Local `config.yml` editing with catch-all enforcement and reload pipeline.
+[Unreleased]: https://github.com/MasFana/cftui/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/MasFana/cftui/releases/tag/v0.1.0
