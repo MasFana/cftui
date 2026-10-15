@@ -43,7 +43,7 @@ type Backends struct {
 // Detect tells the UI which side owns each tunnel's configuration, so the
 // tunnel list can badge it and the routes view can warn when the two sides
 // disagree (FR-20 / FR-20a). Every field is optional: with none set the UI
-// simply shows no badges and no disagreement warning.
+// shows no badges and no disagreement warning.
 type Detect struct {
 	// Management maps a tunnel name to its owning side. A missing name is
 	// reported as "unknown".

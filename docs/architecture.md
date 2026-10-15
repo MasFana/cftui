@@ -33,8 +33,8 @@ type Backend interface {
 
 Two implementations satisfy it:
 
-- **remote** — talks to the Cloudflare API using a token minted from the origin
-  certificate. Available when `cert.pem` exists and `CLOUDFLARE_API_TOKEN` is unset.
+- **remote** — talks to the Cloudflare API using the origin certificate's
+  embedded token. Available when `cert.pem` exists and `CLOUDFLARE_API_TOKEN` is unset.
 - **local** — shells out to `cloudflared` and edits `config.yml` on disk.
 
 At startup `cmd/cftui` attaches the remote backend when it can and records why

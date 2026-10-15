@@ -17,8 +17,8 @@ helps.
   produced by `cloudflared tunnel login`. An API token in
   `CLOUDFLARE_API_TOKEN` is refused rather than used, so the UI's authority is
   never broader than the certificate you already created.
-- **No secret persistence.** `cftui` reads the origin certificate and mints a
-  short-lived token in memory. It writes no credential to disk.
+- **No secret persistence.** `cftui` reads the origin certificate and uses the
+  API token embedded in it, in memory. It writes no credential to disk.
 - **No secret logging.** The origin certificate type redacts its token in every
   `fmt` verb, so an accidental `%v` on a config struct cannot leak it.
 - **Tokens are masked.** The connector-token panel shows a masked form by
@@ -28,10 +28,10 @@ helps.
 
 ## Scope
 
-The origin certificate is as powerful as the zone it was issued for. Anyone who
-can read `~/.cloudflared/cert.pem` can act on your account through `cftui` or
-`cloudflared` alike. Protect that file with normal filesystem permissions; the
-tooling does not add a second factor.
+The origin certificate carries the authority of the zone it was issued for.
+Anyone who can read `~/.cloudflared/cert.pem` can act on your account through
+`cftui` or `cloudflared` alike. Protect that file with normal filesystem
+permissions; the tooling does not add a second factor.
 
 `cftui` shells out to the `cloudflared` binary found on `PATH` or named by
 `CLOUDFLARED`. If an attacker can replace that binary, they run as you —

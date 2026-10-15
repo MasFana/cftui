@@ -23,7 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `arm64`) via goreleaser.
 - Continuous integration across Linux, macOS, and Windows, plus a cross-compile
   matrix.
-- Comprehensive documentation under `docs/`.
+- Documentation under `docs/`: installation, authentication, CLI, keys,
+  configuration, architecture, troubleshooting, and development.
 - `SECURITY.md` describing the credential model and disclosure process.
 
 ### Changed

@@ -55,9 +55,8 @@ cftui - tunnels
 
 ## Authentication: two different tokens, one job each
 
-This is the most commonly confused part of Cloudflare tunnels, so it is worth
-being precise. **There are two different kinds of token, with two different
-purposes.** `cftui` uses one of them.
+Cloudflare tunnels use two different kinds of token, with two different
+purposes. `cftui` uses one of them.
 
 ### 1. The origin certificate — OAuth login (what `cftui` uses)
 

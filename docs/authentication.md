@@ -1,8 +1,8 @@
 # Authentication
 
 Cloudflare's tunnel tooling involves **two different tokens**. They look
-similar but do completely different jobs, and mixing them up is the single most
-common source of confusion. `cftui` treats them very differently on purpose.
+similar but do completely different jobs, and mixing them up is a common source
+of confusion. `cftui` treats them very differently on purpose.
 
 ## The origin certificate (what cftui authenticates with)
 
@@ -14,8 +14,9 @@ cloudflared tunnel login
 
 once opens a browser, you pick a zone, and cloudflared writes
 `~/.cloudflared/cert.pem`. That file contains an OAuth certificate scoped to the
-zone you selected. `cftui` reads it, mints a short-lived API token from it in
-memory, and uses that token for every Cloudflare API call.
+zone you selected, and the certificate embeds an API token. `cftui` reads that
+token and uses it for every Cloudflare API call. It does not mint a token or
+exchange the certificate for one.
 
 Properties:
 
